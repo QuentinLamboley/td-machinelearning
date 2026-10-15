@@ -127,122 +127,13 @@ def header(phase: str, title: str, introduction: str):
 
 
 def vampire_avatar(humans: int, vampires: int, proximity: int):
-    total = max(humans + vampires, 1)
-    html = f"""
-    <div id="vampire-scene" style="height:430px;position:relative;overflow:hidden;border-radius:24px;border:1px solid rgba(255,255,255,.08);background:radial-gradient(circle at 20% 18%, rgba(143,113,255,.18), transparent 28%),linear-gradient(180deg,#141a2e 0%,#101625 52%,#0a0e1a 100%);box-shadow:0 25px 60px rgba(0,0,0,.28);">
-      <style>
-        #vampire-scene * {{ box-sizing:border-box; }}
-        #vampire-scene .moon {{ position:absolute; right:28px; top:26px; width:84px; height:84px; border-radius:50%; background:radial-gradient(circle at 35% 30%, #fff 0%, #efeaff 38%, #b8a6ff 72%, #7d66ff 100%); box-shadow:0 0 40px rgba(185,166,255,.32); }}
-        #vampire-scene .mist {{ position:absolute; inset:auto 0 0 0; height:150px; background:linear-gradient(180deg, rgba(143,113,255,0), rgba(143,113,255,.03) 24%, rgba(255,255,255,.08) 100%); filter:blur(10px); }}
-        #vampire-scene .caption {{ position:absolute; left:24px; top:22px; color:#f5f2ff; z-index:4; }}
-        #vampire-scene .caption .over {{ font-size:11px; letter-spacing:.18em; font-weight:800; color:#ff97ba; margin-bottom:8px; }}
-        #vampire-scene .caption .title {{ font-size:1.15rem; font-weight:800; line-height:1.2; max-width:220px; }}
-        #vampire-scene .caption .sub {{ margin-top:7px; font-size:.84rem; color:#c9c3dc; max-width:245px; line-height:1.5; }}
-        #vampire-scene .bat {{ position:absolute; width:34px; height:16px; border-top:3px solid rgba(255,255,255,.7); border-radius:60% 60% 0 0; opacity:.55; }}
-        #vampire-scene .bat:before, #vampire-scene .bat:after {{ content:''; position:absolute; top:-3px; width:17px; height:16px; border-top:3px solid rgba(255,255,255,.7); border-radius:60% 60% 0 0; }}
-        #vampire-scene .bat:before {{ left:-11px; transform:rotate(-18deg); }}
-        #vampire-scene .bat:after {{ right:-11px; transform:rotate(18deg); }}
-        #vampire-scene .scene-floor {{ position:absolute; left:0; right:0; bottom:0; height:82px; background:linear-gradient(180deg, rgba(14,18,33,0), rgba(7,9,18,.98)); }}
-        #vampire-scene .vampire-wrap {{ position:absolute; left:50%; top:52%; width:230px; height:285px; transform:translate(-50%,-50%); perspective:900px; z-index:3; }}
-        #vampire-scene .vampire {{ position:absolute; inset:0; transform-style:preserve-3d; transition:transform .16s ease-out; }}
-        #vampire-scene .cape-back {{ position:absolute; left:22px; top:80px; width:190px; height:184px; border-radius:54% 54% 24% 24%; background:linear-gradient(180deg,#3b1833 0%, #2a1026 38%, #120712 100%); box-shadow:inset 0 0 0 1px rgba(255,255,255,.03); }}
-        #vampire-scene .cape-back:before {{ content:''; position:absolute; inset:10px 20px 16px; border-radius:50% 50% 28% 28%; background:linear-gradient(180deg, rgba(255,133,173,.26), rgba(255,133,173,0) 38%); }}
-        #vampire-scene .head {{ position:absolute; left:66px; top:30px; width:98px; height:116px; border-radius:48% 48% 46% 46%; background:linear-gradient(180deg,#fbf4ff 0%,#eddcf7 62%,#d6c1ea 100%); box-shadow:0 15px 24px rgba(0,0,0,.18); }}
-        #vampire-scene .hair {{ position:absolute; left:57px; top:17px; width:117px; height:104px; border-radius:54% 54% 42% 42%; background:linear-gradient(180deg,#10131d 0%,#191d2a 100%); }}
-        #vampire-scene .hair:before, #vampire-scene .hair:after {{ content:''; position:absolute; top:8px; width:0; height:0; border-left:16px solid transparent; border-right:16px solid transparent; border-bottom:28px solid #121621; }}
-        #vampire-scene .hair:before {{ left:6px; transform:rotate(-20deg); }}
-        #vampire-scene .hair:after {{ right:6px; transform:rotate(20deg); }}
-        #vampire-scene .hairline {{ position:absolute; left:77px; top:38px; width:76px; height:46px; background:#131722; clip-path:polygon(0 0,100% 0,78% 52%,50% 100%,22% 52%); }}
-        #vampire-scene .ear {{ position:absolute; top:68px; width:18px; height:28px; background:#ead5f2; }}
-        #vampire-scene .ear.left {{ left:56px; clip-path:polygon(100% 0,0 50%,100% 100%); }}
-        #vampire-scene .ear.right {{ left:156px; clip-path:polygon(0 0,100% 50%,0 100%); }}
-        #vampire-scene .brow {{ position:absolute; top:74px; width:20px; height:4px; background:#1a1d2a; border-radius:999px; }}
-        #vampire-scene .brow.left {{ left:85px; transform:rotate(-10deg); }}
-        #vampire-scene .brow.right {{ left:125px; transform:rotate(10deg); }}
-        #vampire-scene .eye {{ position:absolute; top:80px; width:22px; height:15px; background:#fff; border-radius:999px; overflow:hidden; box-shadow:0 0 0 1px rgba(23,27,41,.14) inset; }}
-        #vampire-scene .eye.left {{ left:82px; }}
-        #vampire-scene .eye.right {{ left:126px; }}
-        #vampire-scene .pupil {{ position:absolute; left:7px; top:3px; width:8px; height:8px; border-radius:50%; background:radial-gradient(circle at 35% 35%, #ffadc6 0%, #cf456e 38%, #2b1a29 100%); transition:transform .06s linear; }}
-        #vampire-scene .nose {{ position:absolute; left:109px; top:89px; width:11px; height:24px; border-left:2px solid rgba(120,88,136,.45); border-bottom:2px solid rgba(120,88,136,.28); border-radius:0 0 0 8px; }}
-        #vampire-scene .mouth {{ position:absolute; left:92px; top:112px; width:44px; height:18px; border-bottom:3px solid #7f314d; border-radius:0 0 50px 50px; }}
-        #vampire-scene .fang {{ position:absolute; top:127px; width:5px; height:16px; background:linear-gradient(180deg,#fff 0%,#f1ebf8 100%); clip-path:polygon(0 0,100% 0,50% 100%); }}
-        #vampire-scene .fang.left {{ left:102px; }}
-        #vampire-scene .fang.right {{ left:122px; }}
-        #vampire-scene .neck {{ position:absolute; left:101px; top:136px; width:28px; height:24px; background:linear-gradient(180deg,#e7d4f0 0%,#d9c4ea 100%); border-radius:0 0 10px 10px; }}
-        #vampire-scene .body {{ position:absolute; left:61px; top:146px; width:108px; height:112px; border-radius:36px 36px 28px 28px; background:linear-gradient(180deg,#202636 0%,#111624 100%); box-shadow:0 18px 26px rgba(0,0,0,.18); overflow:hidden; }}
-        #vampire-scene .shirt {{ position:absolute; left:25px; top:18px; width:58px; height:78px; background:linear-gradient(180deg,#fbf8ff 0%,#e9e1f3 100%); clip-path:polygon(50% 0,100% 24%,82% 100%,18% 100%,0 24%); }}
-        #vampire-scene .medallion {{ position:absolute; left:45px; top:26px; width:18px; height:18px; border-radius:50%; background:radial-gradient(circle at 35% 30%, #ffe5a0 0%, #f0bf58 55%, #8d6521 100%); box-shadow:0 0 10px rgba(240,191,88,.28); }}
-        #vampire-scene .lapel {{ position:absolute; top:10px; width:34px; height:50px; background:linear-gradient(180deg,#65162d 0%,#320b18 100%); }}
-        #vampire-scene .lapel.left {{ left:12px; clip-path:polygon(0 0,100% 0,76% 100%,0 70%); }}
-        #vampire-scene .lapel.right {{ right:12px; clip-path:polygon(0 0,100% 0,100% 70%,24% 100%); }}
-        #vampire-scene .stats {{ position:absolute; left:24px; right:24px; bottom:18px; display:grid; grid-template-columns:repeat(3,1fr); gap:10px; z-index:4; }}
-        #vampire-scene .pill {{ background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:11px 12px; backdrop-filter:blur(6px); }}
-        #vampire-scene .pill b {{ display:block; color:#fff; font-size:1.03rem; }}
-        #vampire-scene .pill span {{ display:block; margin-top:4px; color:#bdb7cf; font-size:.76rem; line-height:1.35; }}
-      </style>
-      <div class="moon"></div>
-      <div class="bat" style="left:236px;top:46px;transform:scale(.8)"></div>
-      <div class="bat" style="left:274px;top:88px;transform:scale(.56)"></div>
-      <div class="caption">
-        <div class="over">JEU DE DONNÉES</div>
-        <div class="title">Population d'humains et de vampires</div>
-        <div class="sub">Un simple décor pour une vraie démarche d'analyse : observer, entraîner, comparer, puis interpréter.</div>
-      </div>
-      <div class="vampire-wrap">
-        <div class="vampire" id="vampire-card">
-          <div class="cape-back"></div>
-          <div class="ear left"></div><div class="ear right"></div>
-          <div class="hair"></div>
-          <div class="head"></div>
-          <div class="hairline"></div>
-          <div class="brow left"></div><div class="brow right"></div>
-          <div class="eye left"><div class="pupil"></div></div>
-          <div class="eye right"><div class="pupil"></div></div>
-          <div class="nose"></div><div class="mouth"></div>
-          <div class="fang left"></div><div class="fang right"></div>
-          <div class="neck"></div>
-          <div class="body">
-            <div class="shirt"></div>
-            <div class="lapel left"></div><div class="lapel right"></div>
-            <div class="medallion"></div>
-          </div>
-        </div>
-      </div>
-      <div class="mist"></div>
-      <div class="scene-floor"></div>
-      <div class="stats">
-        <div class="pill"><b>{humans:,}</b><span>Humains</span></div>
-        <div class="pill"><b>{vampires:,}</b><span>Vampires</span></div>
-        <div class="pill"><b>{proximity}%</b><span>Proximité des profils</span></div>
-      </div>
-    </div>
-    <script>
-      (function() {{
-        const root = document.getElementById('vampire-scene');
-        if (!root) return;
-        const card = root.querySelector('#vampire-card');
-        const pupils = root.querySelectorAll('.pupil');
-        const move = (event) => {{
-          const rect = root.getBoundingClientRect();
-          const x = (event.clientX - rect.left) / rect.width;
-          const y = (event.clientY - rect.top) / rect.height;
-          const rx = (0.5 - y) * 10;
-          const ry = (x - 0.5) * 16;
-          card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
-          const px = Math.max(-4, Math.min(4, (x - 0.5) * 10));
-          const py = Math.max(-3, Math.min(3, (y - 0.5) * 8));
-          pupils.forEach((p) => p.style.transform = `translate(${px}px, ${py}px)`);
-        }};
-        const reset = () => {{
-          card.style.transform = 'rotateX(0deg) rotateY(0deg)';
-          pupils.forEach((p) => p.style.transform = 'translate(0px,0px)');
-        }};
-        root.addEventListener('mousemove', move);
-        root.addEventListener('mouseleave', reset);
-      }})();
-    </script>
-    """
-    components.html(html, height=430)
+    """Affiche le portrait interactif, conservé dans un fichier HTML autonome."""
+    template = (Path(__file__).resolve().parent.parent / "assets" / "vampire_scene.html").read_text(encoding="utf-8")
+    html = (template.replace("__HUMANS__", str(max(int(humans), 0)))
+                    .replace("__VAMPIRES__", str(max(int(vampires), 0)))
+                    .replace("__PROXIMITY__", str(max(0, min(100, int(proximity))))))
+    components.html(html, height=430, scrolling=False)
+
 
 def hint(content: str, warning: bool = False):
     css = "teaching warn" if warning else "teaching"
