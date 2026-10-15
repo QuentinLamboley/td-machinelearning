@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#080b13;font-family:Inter,'Segoe UI',system-ui,sans-serif;color:white}
+.stage{position:relative;width:100%;height:430px;overflow:hidden;isolation:isolate;background:radial-gradient(ellipse 85% 65% at 62% 31%,#33243e 0%,#14172b 55%,#0b101f 80%,#080c16 100%);border:1px solid rgba(236,196,234,.16);border-radius:24px;box-shadow:inset 0 0 45px rgba(0,0,0,.38)}
+.stage:before{position:absolute;content:'';inset:0;z-index:3;pointer-events:none;background:radial-gradient(ellipse at 58% 38%,transparent 28%,rgba(4,5,13,.25) 72%,rgba(4,5,13,.71) 100%)}
+.glow{position:absolute;width:325px;height:325px;border-radius:50%;right:12%;top:8%;background:radial-gradient(circle,rgba(205,90,128,.15),rgba(97,65,160,.11) 39%,transparent 71%);filter:blur(18px);animation:pulse 7s ease-in-out infinite}
+.hud{position:absolute;inset:21px 25px auto 25px;z-index:6;pointer-events:none;max-width:45%}.eyebrow{font-weight:800;color:#ec96ac;letter-spacing:.21em;font-size:10px}.headline{font-weight:760;font-size:clamp(16px,2.2vw,19px);line-height:1.25;letter-spacing:-.03em;margin-top:8px;color:#f9f3f8}.subtitle{margin-top:8px;font-size:11px;color:#c8bece;line-height:1.5;max-width:200px}
+.art{position:absolute;width:100%;height:100%;inset:0;object-fit:contain;transform:translate3d(0,0,0);overflow:visible;pointer-events:none}.portrait{filter:drop-shadow(0 9px 24px rgba(0,0,0,.6))}.head{transform-box:fill-box;transform-origin:center 71%;transition:transform .35s ease-out}.eyes .iris{transition:transform .1s ease-out;transform-box:fill-box;transform-origin:center}.foreground{position:absolute;z-index:7;inset:auto 13px 12px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.stat{background:linear-gradient(145deg,rgba(42,40,66,.89),rgba(18,22,38,.92));border:1px solid rgba(229,215,253,.15);border-radius:12px;padding:9px 9px 8px;box-shadow:0 6px 16px rgba(0,0,0,.18);backdrop-filter:blur(8px)}.stat strong{display:block;font-variant-numeric:tabular-nums;font-size:15px;font-weight:800;line-height:1.1;color:#fff}.stat small{display:block;color:#aaa6bd;font-size:9px;margin-top:5px;line-height:1.22}
+.vignette{position:absolute;z-index:4;bottom:0;left:0;right:0;height:95px;background:linear-gradient(0deg,rgba(9,9,22,.92),transparent);pointer-events:none}.spark{position:absolute;z-index:2;width:2px;height:2px;border-radius:100%;background:#ffe0e9;box-shadow:0 0 11px 3px rgba(236,124,169,.22);animation:float 7s infinite alternate ease-in-out;pointer-events:none}.spark:nth-of-type(2){left:76%;top:16%;animation-delay:-3s}.spark:nth-of-type(3){left:42%;top:69%;animation-delay:-4s}.spark:nth-of-type(4){left:88%;top:64%;animation-delay:-2s}
+@keyframes float{from{opacity:.3;transform:translateY(7px)}to{opacity:.95;transform:translateY(-18px)}}@keyframes pulse{50%{opacity:.65;transform:scale(1.12)}}
+@media(prefers-reduced-motion:reduce){.spark,.glow{animation:none}.head,.iris{transition:none}}
+@media(max-width:480px){.hud{max-width:46%;left:15px;top:16px}.headline{font-size:15px}.subtitle{font-size:10px}.stat{padding:8px 7px}.stat strong{font-size:13px}.stat small{font-size:8px}}
+</style>
+</head><body>
+<main class="stage" id="stage" aria-label="Portrait de vampire animé. Ses yeux suivent le pointeur de la souris.">
+<div class="glow"></div><i class="spark" style="left:70%;top:22%"></i><i class="spark" style="left:84%;top:36%"></i><i class="spark" style="left:43%;top:71%"></i><i class="spark" style="left:85%;top:69%"></i>
+<div class="hud"><div class="eyebrow">DOSSIER N° 01</div><div class="headline">Qui est vampire ?</div><div class="subtitle">Une population fictive à analyser. À toi d'en découvrir les caractéristiques.</div></div>
+<svg class="art" viewBox="0 0 520 430" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Vampire aristocratique au regard rouge dans une atmosphère gothique">
+<defs>
+  <radialGradient id="moon"><stop stop-color="#fff7ec"/><stop offset=".45" stop-color="#e2d9ef"/><stop offset="1" stop-color="#b1a4d0"/></radialGradient>
+  <radialGradient id="fog"><stop stop-color="#936999" stop-opacity=".27"/><stop offset="1" stop-color="#1c1833" stop-opacity="0"/></radialGradient>
+  <linearGradient id="cloaked" x1="0" y1=".1" x2="1" y2="1"><stop stop-color="#0d111b"/><stop offset=".28" stop-color="#292332"/><stop offset=".55" stop-color="#100d1a"/><stop offset=".8" stop-color="#26101c"/><stop offset="1" stop-color="#090a13"/></linearGradient>
+  <linearGradient id="coat" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#2e2530"/><stop offset=".3" stop-color="#101521"/><stop offset=".63" stop-color="#0b1019"/><stop offset="1" stop-color="#23121f"/></linearGradient>
+  <linearGradient id="velvet" x1="0" x2="1" y1="0" y2=".8"><stop stop-color="#75263d"/><stop offset=".25" stop-color="#3a1427"/><stop offset=".7" stop-color="#240f24"/><stop offset="1" stop-color="#100c17"/></linearGradient>
+  <radialGradient id="skin" cx="38%" cy="31%" r="82%"><stop stop-color="#efe6e2"/><stop offset=".35" stop-color="#d4c8c9"/><stop offset=".67" stop-color="#aaa2b4"/><stop offset=".91" stop-color="#5b5169"/><stop offset="1" stop-color="#383044"/></radialGradient>
+  <linearGradient id="nose" x1="0" x2="1"><stop stop-color="#776677" stop-opacity="0"/><stop offset=".44" stop-color="#eee1dd" stop-opacity=".86"/><stop offset=".73" stop-color="#bfacb9"/><stop offset="1" stop-color="#6f5f76" stop-opacity=".1"/></linearGradient>
+  <linearGradient id="hair" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#343443"/><stop offset=".2" stop-color="#090e18"/><stop offset=".4" stop-color="#141526"/><stop offset=".65" stop-color="#090b15"/><stop offset=".83" stop-color="#252033"/><stop offset="1" stop-color="#070a13"/></linearGradient>
+  <linearGradient id="shine" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ced6de"/><stop offset=".5" stop-color="#63556c"/><stop offset="1" stop-color="#1b2035"/></linearGradient>
+  <radialGradient id="iriscolor"><stop stop-color="#120c14"/><stop offset=".32" stop-color="#2b131c"/><stop offset=".38" stop-color="#b42343"/><stop offset=".73" stop-color="#76203c"/><stop offset="1" stop-color="#22131d"/></radialGradient>
+  <radialGradient id="gem"><stop stop-color="#ffb2b1"/><stop offset=".2" stop-color="#df4d67"/><stop offset=".52" stop-color="#7b1637"/><stop offset="1" stop-color="#310a21"/></radialGradient>
+  <filter id="soft"><feGaussianBlur stdDeviation="8"/></filter>
+  <filter id="skintexture" x="-12%" y="-12%" width="124%" height="124%"><feTurbulence type="fractalNoise" baseFrequency=".42" numOctaves="3" seed="14" result="n"/><feColorMatrix in="n" type="saturate" values="0" result="gray"/><feComponentTransfer in="gray" result="grain"><feFuncA type="linear" slope=".065"/></feComponentTransfer><feBlend in="SourceGraphic" in2="grain" mode="soft-light"/></filter>
+  <filter id="drop" x="-35%" y="-35%" width="170%" height="170%"><feGaussianBlur stdDeviation="6"/></filter>
+  <clipPath id="eyeL"><path d="M294 162 Q306 151 324 162 Q308 174 294 162Z"/></clipPath>
+  <clipPath id="eyeR"><path d="M349 161 Q362 149 378 158 Q362 173 349 161Z"/></clipPath>
+</defs>
+<!-- Gothic atmosphere -->
+<ellipse cx="355" cy="193" rx="176" ry="225" fill="url(#fog)"/>
+<g opacity=".35" fill="none" stroke="#76687e" stroke-width="3"><path d="M184 0V257 M191 0Q260 72 215 195M466 0Q400 72 452 195"/><path d="M236 0V79M423 0V99"/></g>
+<circle cx="434" cy="68" r="44" fill="#ccb4da" opacity=".1" filter="url(#soft)"/><circle cx="434" cy="68" r="31" fill="url(#moon)" opacity=".7"/><circle cx="448" cy="58" r="6" fill="#8e7e9f" opacity=".12"/>
+<g opacity=".7"><path d="M232 72Q256 55 272 70Q281 51 291 67Q275 65 272 79Q250 61 232 72Z" fill="#090e1c"/><path d="M462 107Q478 94 486 105Q493 90 503 100Q488 100 486 110Q470 100 462 107Z" fill="#0a0c16"/></g>
+<!-- Silhouette and sculpted costume -->
+<g class="portrait" id="portrait">
+<ellipse cx="335" cy="388" rx="175" ry="67" fill="#050811" opacity=".78" filter="url(#drop)"/>
+<path d="M250 288Q212 296 190 336Q161 370 138 435H517Q480 343 431 306Q400 288 387 283Z" fill="url(#cloaked)" stroke="#4b324a" stroke-width="1.1"/>
+<path d="M246 284Q213 310 193 361Q219 341 244 342L289 422L304 334Z" fill="url(#velvet)" stroke="#613044" stroke-width="1.4"/>
+<path d="M397 283Q433 309 462 379L434 353L396 367L367 422L345 325Z" fill="url(#velvet)" stroke="#552940" stroke-width="1.4"/>
+<path d="M288 286Q314 279 351 286Q397 319 414 430H245Q255 330 288 286Z" fill="url(#coat)" stroke="#675064" stroke-width="1.1"/>
+<path d="M302 310Q315 295 336 313Q348 296 365 308L357 431H302Z" fill="#cccad1" opacity=".93"/>
+<path d="M317 310Q329 321 336 330Q343 322 353 312L344 426H328Z" fill="#241c2c"/><path d="M326 332L335 345L345 330L343 409L334 426L327 409Z" fill="#691c36"/>
+<path d="M248 279Q215 277 208 340L266 374Q276 341 298 307L288 277Z" fill="url(#coat)" stroke="#635167" stroke-width="2"/>
+<path d="M394 278Q441 281 458 353L404 374Q387 325 370 303L365 277Z" fill="url(#coat)" stroke="#635167" stroke-width="2"/>
+<path d="M250 282Q260 311 310 329L297 365Q244 345 217 326Q225 302 250 282Z" fill="#151320" stroke="#6d5368" stroke-width="1.5"/>
+<path d="M394 280Q384 310 355 328L365 364Q410 355 443 331Q429 303 394 280Z" fill="#151320" stroke="#6d5368" stroke-width="1.5"/>
+<path d="M269 316Q283 331 298 337M409 317Q391 334 378 341M243 358Q227 382 220 422M440 359Q456 390 457 420" fill="none" stroke="#938199" stroke-width=".8" opacity=".45"/>
+<g fill="none" stroke="#938b9b" stroke-width=".9" opacity=".66"><path d="M261 341L266 358L279 364M391 351L386 366L372 367"/><path d="M267 370L278 395L286 413M391 375L377 404L369 416"/></g>
+<path d="M309 275L303 306Q331 338 355 310L353 274Z" fill="url(#skin)"/>
+<!-- Face with anatomical shaded planes and animated head -->
+<g class="head" id="head">
+<ellipse cx="269" cy="173" rx="17" ry="27" fill="#50475b" opacity=".5"/>
+<path d="M281 137Q264 129 261 156Q258 173 273 181L285 173" fill="url(#skin)" stroke="#665a6c" stroke-width=".8"/>
+<path d="M395 137Q414 132 417 153Q418 172 401 181L390 174" fill="url(#skin)" stroke="#665a6c" stroke-width=".8"/>
+<path d="M268 126Q271 69 313 66Q360 52 393 90Q416 116 411 172Q409 221 388 254Q366 283 341 291Q306 290 284 256Q267 225 267 188Z" fill="url(#skin)" stroke="#726879" stroke-width="1.4" filter="url(#skintexture)"/>
+<path d="M276 141Q274 218 295 246L304 251Q284 219 286 176" fill="#5b4c60" opacity=".22" filter="url(#soft)"/>
+<path d="M387 133Q407 198 384 245L363 270Q391 249 397 215Z" fill="#4b374e" opacity=".22" filter="url(#soft)"/>
+<path d="M282 201Q294 208 312 202M364 201Q388 206 395 197" stroke="#fff5ed" stroke-width="3" opacity=".1" fill="none" filter="url(#soft)"/>
+<path d="M313 176Q323 181 320 198Q317 212 320 221Q332 228 338 223Q341 220 343 205Q346 192 350 177Q345 222 344 231Q329 240 312 229Q316 213 315 201Z" fill="url(#nose)" opacity=".9"/>
+<path d="M314 229Q320 234 327 233M341 231Q346 230 351 226" fill="none" stroke="#695965" stroke-opacity=".52" stroke-width="2"/>
+<path d="M290 158Q303 145 326 156L330 162Q309 154 293 165" fill="#171523" opacity=".95"/><path d="M346 158Q364 144 386 150L389 156Q371 153 349 165" fill="#171523" opacity=".95"/>
+<g class="eyes">
+  <path d="M292 162Q307 151 324 162Q307 174 292 162Z" fill="#e2d5d0" stroke="#4d3646" stroke-width="1.6"/>
+  <path d="M349 161Q363 148 379 158Q363 173 349 161Z" fill="#e4d8d2" stroke="#4d3646" stroke-width="1.6"/>
+  <g clip-path="url(#eyeL)"><g class="iris" id="irisL"><circle cx="309" cy="162" r="8.3" fill="url(#iriscolor)"/><circle cx="309" cy="162" r="3.5" fill="#0a0710"/><circle cx="306.8" cy="158.8" r="1.9" fill="#f9eff3" opacity=".82"/></g></g>
+  <g clip-path="url(#eyeR)"><g class="iris" id="irisR"><circle cx="365" cy="160" r="8.3" fill="url(#iriscolor)"/><circle cx="365" cy="160" r="3.5" fill="#0a0710"/><circle cx="362.8" cy="156.8" r="1.9" fill="#f9eff3" opacity=".82"/></g></g>
+  <path d="M293 161Q310 148 327 160M349 159Q366 145 382 154" stroke="#241a28" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+  <path d="M293 166Q311 174 326 165M349 165Q367 172 379 162" stroke="#9a707f" stroke-opacity=".5" stroke-width="1.3" fill="none"/>
+</g>
+<path d="M304 197Q313 198 315 201M359 195Q370 199 379 191" stroke="#786779" stroke-width="1.2" fill="none" opacity=".55"/>
+<path d="M315 248Q328 243 337 245Q344 242 360 247Q345 259 327 258Q318 257 315 248Z" fill="#713346" opacity=".88"/>
+<path d="M320 249Q340 251 356 248Q345 255 325 252Z" fill="#2e151d"/>
+<path d="M325 252L329 263L332 253ZM348 253L352 262L355 250Z" fill="#fff5ee" stroke="#dfd5d2" stroke-width=".7"/>
+<path d="M316 246Q329 241 337 245Q344 242 360 246" fill="none" stroke="#c3888f" opacity=".56" stroke-width="1.2"/>
+<path d="M306 261Q335 286 367 260" fill="none" stroke="#776676" stroke-width="2" opacity=".2"/>
+<!-- Layered hair, silver glints and individual strands -->
+<path d="M271 144Q247 81 293 53Q311 35 349 40Q396 39 412 78Q436 119 408 155Q408 113 398 97Q377 88 364 82Q343 92 325 105Q302 107 287 131L275 178Z" fill="url(#hair)" stroke="#3e344b" stroke-width="1.5"/>
+<path d="M279 152Q273 116 284 98Q303 85 323 94Q340 89 352 72Q322 76 297 66Q263 88 279 152Z" fill="#11131e"/>
+<path d="M276 161Q273 109 292 88Q321 57 370 63Q400 66 408 113Q399 83 382 78Q359 71 340 91Q315 105 291 122Z" fill="#161522"/>
+<path d="M275 137Q270 87 298 64Q313 49 344 49M381 55Q407 65 408 114M279 105Q290 72 314 61M298 88Q319 68 355 60" stroke="#778199" stroke-width="1.4" opacity=".22" fill="none"/>
+<path d="M406 120Q417 168 403 223Q412 205 416 191Q421 160 414 130Z" fill="#0e111f"/>
+<path d="M268 133Q260 170 277 221Q267 214 261 190Q253 160 265 127Z" fill="#111320"/>
+</g>
+<!-- Collar overlaps the neck to make layered depth -->
+<path d="M246 275Q266 311 308 326L299 345Q251 331 224 302L224 263Z" fill="url(#velvet)" stroke="#9d4968" stroke-opacity=".54"/>
+<path d="M397 274Q393 311 362 326L371 345Q414 330 437 299L429 258Z" fill="url(#velvet)" stroke="#9d4968" stroke-opacity=".54"/>
+<path d="M256 284Q274 308 309 324M393 284Q389 309 365 326" stroke="#bd8195" stroke-width="1.3" opacity=".47" fill="none"/>
+<circle cx="337" cy="327" r="14" fill="url(#shine)" stroke="#a3a4ae" stroke-width="1.6"/><circle cx="337" cy="327" r="9" fill="url(#gem)"/><circle cx="334" cy="323" r="2.4" fill="#fff" opacity=".72"/>
+<path d="M289 350Q309 365 327 346M349 346Q365 368 388 353" stroke="#a39ca8" opacity=".68" stroke-width="1.5" fill="none"/>
+<g fill="#b4a6b5"><circle cx="310" cy="358" r="2"/><circle cx="367" cy="357" r="2"/><circle cx="320" cy="362" r="1.6"/><circle cx="359" cy="363" r="1.6"/></g>
+</g>
+</svg>
+<div class="vignette"></div>
+<div class="foreground"><div class="stat"><strong id="humans">0</strong><small>Humains</small></div><div class="stat"><strong id="vampires">0</strong><small>Vampires</small></div><div class="stat"><strong id="proximity">0 %</strong><small>Proximité</small></div></div>
+</main>
+<script>
+(function(){
+  'use strict';
+  const scene=document.getElementById('stage');
+  const head=document.getElementById('head');
+  const portrait=document.getElementById('portrait');
+  const pupils=[document.getElementById('irisL'),document.getElementById('irisR')];
+  const human=Number('__HUMANS__'),vampire=Number('__VAMPIRES__'),proximity=Number('__PROXIMITY__');
+  const fmt=new Intl.NumberFormat('fr-FR');
+  document.getElementById('humans').textContent=fmt.format(human);
+  document.getElementById('vampires').textContent=fmt.format(vampire);
+  document.getElementById('proximity').textContent=fmt.format(proximity)+' %';
+  let targetX=0,targetY=0,x=0,y=0,frame=0;
+  const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const updatePointer=(event)=>{
+    const r=scene.getBoundingClientRect();
+    targetX=Math.max(-1,Math.min(1,(event.clientX-r.left-r.width*.65)/(r.width*.40)));
+    targetY=Math.max(-1,Math.min(1,(event.clientY-r.top-r.height*.44)/(r.height*.42)));
+  };
+  scene.addEventListener('pointermove',updatePointer,{passive:true});
+  scene.addEventListener('pointerleave',()=>{targetX=0;targetY=0},{passive:true});
+  const tick=()=>{
+    x+=(targetX-x)*.12;y+=(targetY-y)*.12;
+    const irisTransform='translate('+(x*4.6).toFixed(2)+'px,'+(y*2.9).toFixed(2)+'px)';
+    pupils.forEach(iris=>{iris.style.transform=irisTransform});
+    if(!reduceMotion){
+      const hx=x*1.4,hy=y*1.0;
+      head.style.transform='translate('+hx.toFixed(2)+'px,'+hy.toFixed(2)+'px) rotate('+(x*.6).toFixed(2)+'deg)';
+      portrait.style.transform='translate('+(-x*.95).toFixed(2)+'px,'+(-y*.55).toFixed(2)+'px)';
+    }
+    frame=requestAnimationFrame(tick);
+  };
+  frame=requestAnimationFrame(tick);
+  window.addEventListener('pagehide',()=>cancelAnimationFrame(frame),{once:true});
+})();
+</script>
+</body></html>
