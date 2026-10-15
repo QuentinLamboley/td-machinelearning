@@ -9,7 +9,7 @@
 .photo{width:100%;height:100%;object-fit:cover;object-position:50% 36%;display:block;position:absolute;inset:0;will-change:transform;transition:filter .2s ease;filter:saturate(1.08) contrast(1.03)}
 .scene:before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(180deg,rgba(8,9,19,.54) 0%,rgba(8,9,19,0) 19%,rgba(11,8,18,0) 57%,rgba(6,6,14,.94) 100%),linear-gradient(90deg,rgba(9,9,18,.25),transparent 42%,rgba(11,7,17,.10));}
 .scene:after{content:"";position:absolute;inset:0;z-index:7;pointer-events:none;border-radius:22px;box-shadow:inset 0 0 70px rgba(0,0,0,.42),inset 0 0 0 1px rgba(255,255,255,.08)}
-.gaze{position:absolute;z-index:4;pointer-events:none;transform:translate(-50%,-50%);width:15px;height:10px;border-radius:50%;background:radial-gradient(ellipse at 42% 40%,#1a0007 0%,#48030d 33%,#b71330 59%,rgba(255,25,75,0) 82%);mix-blend-mode:screen;opacity:.89;filter:blur(.4px) drop-shadow(0 0 3px rgba(241,28,63,.35));will-change:transform,left,top}
+.gaze{position:absolute;z-index:4;pointer-events:none;transform:translate(-50%,-50%);width:15px;height:15px;border-radius:50%;background:radial-gradient(ellipse at 42% 40%,#1a0007 0%,#48030d 33%,#b71330 59%,rgba(255,25,75,0) 82%);mix-blend-mode:screen;opacity:.89;filter:blur(.4px) drop-shadow(0 0 3px rgba(241,28,63,.35));will-change:transform,left,top}
 .gaze:after{content:"";position:absolute;width:2px;height:2px;border-radius:50%;background:#ffece0;left:31%;top:21%;opacity:.7}
 .spec{position:absolute;z-index:5;pointer-events:none;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(166,56,100,.05),transparent 60%);mix-blend-mode:screen}
 .bottom{position:absolute;z-index:8;left:19px;right:19px;bottom:16px;display:flex;flex-direction:column;gap:13px}
@@ -41,7 +41,7 @@
   const root=document.getElementById('scene');
   const photo=document.getElementById('portrait');
   const eyes=[document.getElementById('left-eye'),document.getElementById('right-eye')];
-  const anchors=[[147,314],[250,286]];
+  const anchors=[[143,312],[240,281]];
   const IMAGE_W=530, IMAGE_H=830;
   const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let targetX=0,targetY=0,actualX=0,actualY=0;

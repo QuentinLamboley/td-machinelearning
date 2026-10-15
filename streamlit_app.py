@@ -384,7 +384,7 @@ def population():
             st.warning("Les réglages ont changé, mais le tableau affiché correspond encore au dernier jeu généré. Clique sur « Générer » pour appliquer les nouveaux réglages.")
     a,c=st.columns(2)
     a.metric("Individus",f"{len(df):,}")
-    c.metric("Classe Vampire",f"{df['Vampirisme'].mean():.1%}")
+    c.metric("Pourcentage de vampires",f"{df['Vampirisme'].mean():.1%}")
     t1,t2=st.columns([1,1.3],gap="large")
     with t1:
         ui.vampire_avatar(int((df['Vampirisme']==0).sum()), int((df['Vampirisme']==1).sum()), int(st.session_state['sample_proximity']))
