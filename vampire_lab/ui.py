@@ -127,12 +127,15 @@ def header(phase: str, title: str, introduction: str):
 
 
 def vampire_avatar(humans: int, vampires: int, proximity: int):
-    """Affiche le portrait interactif, conservé dans un fichier HTML autonome."""
-    template = (Path(__file__).resolve().parent.parent / "assets" / "vampire_scene.html").read_text(encoding="utf-8")
-    html = (template.replace("__HUMANS__", str(max(int(humans), 0)))
+    """Affiche le portrait cinématographique et le suivi du regard dans un composant autonome."""
+    assets = Path(__file__).resolve().parent.parent / "assets"
+    template = (assets / "vampire_scene.html").read_text(encoding="utf-8")
+    portrait_data = base64.b64encode((assets / "vampire_cinematic.webp").read_bytes()).decode("ascii")
+    html = (template.replace("__PORTRAIT_DATA__", portrait_data)
+                    .replace("__HUMANS__", str(max(int(humans), 0)))
                     .replace("__VAMPIRES__", str(max(int(vampires), 0)))
                     .replace("__PROXIMITY__", str(max(0, min(100, int(proximity))))))
-    components.html(html, height=430, scrolling=False)
+    components.html(html, height=460, scrolling=False)
 
 
 def hint(content: str, warning: bool = False):
