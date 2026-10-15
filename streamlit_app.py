@@ -68,7 +68,6 @@ def init_state():
 
 def navigate_to(page: str):
     st.session_state["nav"] = page
-    st.session_state["scroll_to_top"] = True
     persist_answers()
 
 def persist_answers():
@@ -113,7 +112,6 @@ def identity_gate():
             st.session_state["notes"] = str(prior.get("notes", ""))[:30000]
             # Toujours présenter les objectifs du TD après connexion, sans effacer le travail.
             st.session_state["nav"] = PAGES[0]
-            st.session_state["scroll_to_top"] = True
             for q in QUESTIONS:
                 st.session_state.pop(f"answer_{q.code}",None)
             persist_answers()
@@ -135,7 +133,6 @@ def restore_backup(payload: dict):
     previous_stage = payload.get("etape")
     if previous_stage in PAGES:
         st.session_state["nav"] = previous_stage
-        st.session_state["scroll_to_top"] = True
     persist_answers()
 
 
@@ -264,13 +261,17 @@ def navigation_header():
 
 
 def jump_to_page_top():
-    """Après une navigation, remettre en haut le conteneur réellement défilant.
+    """Replacer la lecture en haut uniquement lors d'un changement d'étape.
 
-    Le déclencheur est placé après le contenu de la page pour éviter que le
-    navigateur restaure son ancienne position après notre premier scroll.
+    Les interactions avec les widgets provoquent des reruns Streamlit, mais
+    elles ne doivent pas déplacer le lecteur dans la page en cours.
     """
-    if not st.session_state.pop("scroll_to_top", False):
+    current_page = st.session_state["nav"]
+    previous_page = st.session_state.get("_last_rendered_page")
+    st.session_state["_last_rendered_page"] = current_page
+    if previous_page is None or previous_page == current_page:
         return
+
     import streamlit.components.v1 as components
     components.html(r"""
       <script>
@@ -280,6 +281,7 @@ def jump_to_page_top():
             const win = window.parent;
             const doc = win.document;
             const anchor = doc.getElementById('esmiha-page-top');
+            if (anchor) anchor.scrollIntoView({block:'start', behavior:'instant'});
             const selectors = [
               '[data-testid="stMain"]',
               '[data-testid="stAppViewContainer"]',
@@ -288,19 +290,16 @@ def jump_to_page_top():
             const elements = [doc.documentElement, doc.body,
                               doc.scrollingElement,
                               ...selectors.map(s => doc.querySelector(s))];
-            if (anchor) anchor.scrollIntoView({block:'start',behavior:'instant'});
             for (const el of elements) {
               if (el && typeof el.scrollTo === 'function') {
                 el.scrollTo({top:0,left:0,behavior:'instant'});
-                el.scrollTop = 0;
               }
             }
             win.scrollTo(0,0);
-          } catch (_err) { /* Un contexte iframe peut limiter l'accès. */ }
+          } catch (_err) { /* Certains navigateurs limitent l'accès à la fenêtre parente. */ }
         }
         toTop();
         requestAnimationFrame(toTop);
-        [80, 220, 500, 1000, 1700].forEach(ms => setTimeout(toTop,ms));
       })();
       </script>
     """, height=0)
