@@ -1,0 +1,10 @@
+# Tested application API against Streamlit 1.x and scikit-learn 1.x.
+# Python 3.11-3.13 recommended; first installation requires internet.
+streamlit>=1.38,<2
+numpy>=1.26,<3
+scipy>=1.12,<2
+pandas>=2.2,<3
+scikit-learn>=1.4,<2
+plotly>=5.24,<7
+reportlab>=4.2,<5
+xgboost>=2.1,<4

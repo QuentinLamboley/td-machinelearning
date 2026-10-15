@@ -1,0 +1,24 @@
+TD - INTRODUCTION AU MACHINE LEARNING - ESMIHA 2026
+Quentin Lamboley - Version 6.0
+
+LANCEMENT LOCAL
+Windows : LANCER_WINDOWS.bat
+Linux et macOS : sh LANCER_LINUX_MAC.sh
+Le premier lancement installe les dépendances Python.
+
+SUR STREAMLIT CLOUD
+1. Décompresser le ZIP et envoyer tous ses fichiers à la racine du dépôt GitHub.
+2. Dépôt : QuentinLamboley/ESMIHA-2026
+3. Branche : main
+4. Fichier principal : streamlit_app.py
+5. Attendre le redéploiement et tester une session étudiant.
+
+LE TD
+Suivre les étapes grâce aux boutons en bas de page.
+49 questions principales + 9 questions bonus, indices accessibles avec ❔.
+À la fin : exporter ses réponses en PDF individuel et JSON, puis consulter la correction PDF.
+Ne pas fermer la session sans avoir téléchargé sa sauvegarde JSON.
+
+CONCURRENCE
+2 entraînements coûteux simultanés au maximum ; les autres attendent.
+Dix étudiants sur une instance cloud gratuite : tester avant le cours.
