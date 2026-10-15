@@ -12,18 +12,12 @@
 .gaze{position:absolute;z-index:4;pointer-events:none;transform:translate(-50%,-50%);width:15px;height:10px;border-radius:50%;background:radial-gradient(ellipse at 42% 40%,#1a0007 0%,#48030d 33%,#b71330 59%,rgba(255,25,75,0) 82%);mix-blend-mode:screen;opacity:.89;filter:blur(.4px) drop-shadow(0 0 3px rgba(241,28,63,.35));will-change:transform,left,top}
 .gaze:after{content:"";position:absolute;width:2px;height:2px;border-radius:50%;background:#ffece0;left:31%;top:21%;opacity:.7}
 .spec{position:absolute;z-index:5;pointer-events:none;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(166,56,100,.05),transparent 60%);mix-blend-mode:screen}
-.top{position:absolute;z-index:8;left:20px;right:18px;top:18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.kicker{font-size:10px;letter-spacing:.19em;color:#ffc2d0;font-weight:800;text-shadow:0 2px 7px #100312}
-.dot{width:7px;height:7px;background:#f76593;border-radius:50%;display:inline-block;vertical-align:1px;margin-right:7px;box-shadow:0 0 12px rgba(248,66,112,.5)}
-.badge{font-size:10px;color:#d6c0db;padding:6px 9px;border:1px solid rgba(255,255,255,.16);background:rgba(10,10,18,.45);border-radius:999px;backdrop-filter:blur(10px)}
 .bottom{position:absolute;z-index:8;left:19px;right:19px;bottom:16px;display:flex;flex-direction:column;gap:13px}
-.title{font-family:Georgia,Times New Roman,serif;font-size:clamp(24px,4.6vw,32px);letter-spacing:-.035em;font-weight:700;line-height:1.1;text-shadow:0 3px 18px #000}
-.subtitle{font-size:11px;line-height:1.45;color:#e6d6e8;margin-top:5px;text-shadow:0 2px 8px #000}
 .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
 .stat{background:rgba(23,22,36,.76);border:1px solid rgba(230,214,247,.17);border-radius:11px;padding:9px 11px;backdrop-filter:blur(14px);min-width:0}
 .stat strong{display:block;font-size:16px;letter-spacing:-.025em;font-variant-numeric:tabular-nums}
 .stat small{display:block;font-size:10px;color:#bfb3cf;margin-top:2px}
-@media(max-width:370px){.top{left:13px;right:13px}.bottom{left:11px;right:11px;bottom:11px}.stat{padding:8px 7px}.stat strong{font-size:14px}}
+@media(max-width:370px){.bottom{left:11px;right:11px;bottom:11px}.stat{padding:8px 7px}.stat strong{font-size:14px}}
 @media(prefers-reduced-motion:reduce){.photo,.gaze{transition:none!important}}
 </style>
 </head>
@@ -33,9 +27,7 @@
   <div id="left-eye" class="gaze" aria-hidden="true"></div>
   <div id="right-eye" class="gaze" aria-hidden="true"></div>
   <div class="spec"></div>
-  <div class="top"><div class="kicker"><span class="dot"></span>DOSSIER N° 01</div><div class="badge">CLASSIFICATION SUPERVISÉE</div></div>
   <div class="bottom">
-    <div><div class="title">Qui est vampire&nbsp;?</div><div class="subtitle">Une population fictive, une vraie enquête statistique.</div></div>
     <div class="stats">
       <div class="stat"><strong>__HUMANS__</strong><small>Humains</small></div>
       <div class="stat"><strong>__VAMPIRES__</strong><small>Vampires</small></div>

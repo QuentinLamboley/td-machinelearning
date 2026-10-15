@@ -336,6 +336,19 @@ def home():
 | **Validation croisée** | On recommence l'évaluation sur plusieurs petits groupes du train pour éviter de dépendre d'un seul découpage. |
 | **Score** | Un nombre qui résume une facette de la qualité des prédictions. Aucun score ne dit tout. |""")
         st.caption("Ces mots reviendront pendant les manipulations. Les boutons ❔ permettent de retrouver leur sens au bon moment.")
+    with st.expander("Les dix variables du jeu de données"):
+        st.markdown("""- **Fer sanguin** : la quantité de fer présente dans le sang.
+- **Pâleur cutanée** : un indice fictif qui traduit à quel point la peau paraît pâle.
+- **Sensibilité au soleil** : un score fictif qui représente la gêne ressentie au soleil.
+- **Température corporelle** : la température de l'individu, en degrés Celsius.
+- **Âge** : l'âge de l'individu, en années. Oui, certains vampires peuvent être très âgés.
+- **Fréquence cardiaque** : le nombre de battements du cœur par minute.
+- **Régénération** : un indice fictif qui résume la capacité de récupération.
+- **Longueur des canines** : la taille des canines, exprimée en millimètres.
+- **Force** : un indice fictif de force physique.
+- **Vitesse** : un indice fictif de vitesse de déplacement.
+
+Toutes ces variables sont simulées pour l'exercice. Elles servent à construire un jeu de données cohérent pour apprendre à comparer des modèles, pas à décrire une situation réelle.""")
     st.info("Quand tu es prêt, utilise **Étape suivante →** en bas à droite.")
 
 def population():
