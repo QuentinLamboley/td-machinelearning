@@ -111,8 +111,8 @@ def identity_gate():
             st.session_state["student_name"] = name
             st.session_state["td_answers"] = {q.code:str(prior.get("reponses",{}).get(q.code,""))[:8000] for q in QUESTIONS}
             st.session_state["notes"] = str(prior.get("notes", ""))[:30000]
-            previous_stage = prior.get("etape", PAGES[0])
-            st.session_state["nav"] = previous_stage if previous_stage in PAGES else PAGES[0]
+            # Toujours présenter les objectifs du TD après connexion, sans effacer le travail.
+            st.session_state["nav"] = PAGES[0]
             st.session_state["scroll_to_top"] = True
             for q in QUESTIONS:
                 st.session_state.pop(f"answer_{q.code}",None)
@@ -248,6 +248,9 @@ def navigation_header():
                 f"{stage} &nbsp; | &nbsp; {done}/{len(required)} réponses renseignées</div>",
                 unsafe_allow_html=True)
     st.progress((index+1)/len(PAGES))
+    if index > 0:
+        st.button("⌂ Revoir la présentation du TD", key="return_intro",
+                  on_click=navigate_to, args=(PAGES[0],))
     head_a, head_b = st.columns([3,1.5],vertical_alignment="center")
     head_a.caption(f"Travail de {st.session_state['student_name']} · réponses enregistrées à chaque modification")
     backup = {"version":7,"etudiant":st.session_state["student_name"],
